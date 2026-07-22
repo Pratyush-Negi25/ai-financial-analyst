@@ -16,3 +16,21 @@ export async function uploadPDF(file) {
 
   return await response.json();
 }
+
+export async function askQuestion(question) {
+  const response = await fetch(`${BASE_URL}/chat/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      question,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to get AI response.");
+  }
+
+  return await response.json();
+}
