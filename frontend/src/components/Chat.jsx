@@ -3,7 +3,9 @@ import { askQuestion } from "../services/api";
 
 function Chat() {
   const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("Upload a report and ask a question.");
+  const [answer, setAnswer] = useState(
+    "Upload a financial report and ask your first question."
+  );
   const [loading, setLoading] = useState(false);
 
   const handleSend = async () => {
@@ -22,7 +24,7 @@ function Chat() {
       setQuestion("");
     } catch (error) {
       console.error(error);
-      setAnswer("Failed to get AI response.");
+      setAnswer("❌ Failed to get AI response.");
     } finally {
       setLoading(false);
     }
@@ -32,30 +34,27 @@ function Chat() {
     <section className="card">
       <h2>Chat with Financial Report</h2>
 
-      <p>Ask questions about the uploaded financial report.</p>
-
-      <br />
+      <p>
+        Ask AI questions about the uploaded annual report using
+        Retrieval-Augmented Generation (RAG).
+      </p>
 
       <textarea
-        rows="4"
-        placeholder="Ask a question..."
+        rows="5"
+        placeholder="Example: What was Amazon's total revenue in 2024?"
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
       />
 
-      <br />
-      <br />
-
       <button onClick={handleSend} disabled={loading}>
-        {loading ? "Thinking..." : "Send"}
+        {loading ? "Thinking..." : "Send Question"}
       </button>
 
-      <br />
-      <br />
+      <h3>AI Response</h3>
 
-      <strong>AI Response:</strong>
-
-      <p>{answer}</p>
+      <div className="response-card">
+        {answer}
+      </div>
     </section>
   );
 }

@@ -29,13 +29,13 @@ function Upload() {
       const result = await uploadPDF(selectedFile);
 
       setStatus(
-        `Uploaded successfully! ${result.chunks} chunks created.`
+        `✅ Uploaded successfully! ${result.chunks} chunks created.`
       );
 
       console.log(result);
     } catch (error) {
       console.error(error);
-      setStatus("Upload failed.");
+      setStatus("❌ Upload failed.");
     }
   };
 
@@ -43,9 +43,9 @@ function Upload() {
     <section className="card">
       <h2>Upload Financial Report</h2>
 
-      <p>Select a PDF financial report.</p>
-
-      <br />
+      <p>
+        Select a PDF annual report to build the AI knowledge base.
+      </p>
 
       <input
         type="file"
@@ -53,17 +53,13 @@ function Upload() {
         onChange={handleFileChange}
       />
 
-      <br />
-      <br />
-
       <button onClick={handleUpload}>
         Upload PDF
       </button>
 
-      <br />
-      <br />
-
-      <strong>Status:</strong> {status}
+      <div className="status">
+        {status}
+      </div>
     </section>
   );
 }

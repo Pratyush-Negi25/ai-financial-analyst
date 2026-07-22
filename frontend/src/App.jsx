@@ -4,7 +4,7 @@ import Chat from "./components/Chat";
 
 function App() {
   return (
-    <div className="app">
+    <div className="container">
       <Header />
       <Upload />
       <Chat />
