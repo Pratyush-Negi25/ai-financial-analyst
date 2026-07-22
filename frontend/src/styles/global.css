@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f6f8;
+  color: #1f2937;
+}
+
+#root {
+  width: 100%;
+}
+
+.app {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+p {
+  line-height: 1.6;
+}
