@@ -4,6 +4,8 @@ import shutil
 
 from fastapi import APIRouter, File, HTTPException, UploadFile
 
+from app.rag.pipeline import process_pdf
+
 router = APIRouter(
     prefix="/upload",
     tags=["Upload"]
@@ -32,8 +34,13 @@ async def upload_pdf(file: UploadFile = File(...)):
     with destination.open("wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
+    # Process the uploaded PDF
+    result = process_pdf(destination)
+
     return {
         "status": "success",
         "original_filename": file.filename,
-        "stored_filename": filename
+        "stored_filename": filename,
+        "chunks": result["chunks"],
+        "vectors": result["vectors"],
     }

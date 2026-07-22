@@ -1,10 +1,12 @@
 from pathlib import Path
+import pickle
 
 import faiss
 import numpy as np
 
 
-INDEX_PATH = Path("data/faiss_index.index")
+INDEX_PATH = Path("data/indexes/faiss_index.index")
+CHUNKS_PATH = Path("data/metadata/chunks.pkl")
 
 
 def create_vector_store(embeddings: list[list[float]]) -> faiss.IndexFlatL2:
@@ -35,7 +37,27 @@ def save_index(index: faiss.IndexFlatL2):
 
 def load_index() -> faiss.IndexFlatL2:
     """
-    Load FAISS index.
+    Load FAISS index from disk.
     """
 
     return faiss.read_index(str(INDEX_PATH))
+
+
+def save_chunks(chunks: list[str]):
+    """
+    Save document chunks to disk.
+    """
+
+    CHUNKS_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(CHUNKS_PATH, "wb") as file:
+        pickle.dump(chunks, file)
+
+
+def load_chunks() -> list[str]:
+    """
+    Load document chunks from disk.
+    """
+
+    with open(CHUNKS_PATH, "rb") as file:
+        return pickle.load(file)
